@@ -1,1 +1,32 @@
+name: 'Testing'
 
+on:
+  workflow_dispatch
+
+jobs:
+  testing:
+    name: 'testing process'
+    runs-on: ubuntu-latest
+    env:
+      ECR_URL:  157506822563.dkr.ecr.us-east-2.amazonaws.com
+      REGIONANME: us-east-2
+      CLUSTERNAME: test-cluster
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: git repo Checkout
+      uses: actions/checkout@v2
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+
+    - name: Aceesing the shell script for logging
+      run: |
+        chmod 777 test.sh
+        ./test.sh
