@@ -10,7 +10,6 @@ jobs:
     env:
       ECR_URL:  157506822563.dkr.ecr.us-east-2.amazonaws.com
       REGIONANME: us-east-2
-      #CLUSTERNAME: test-cluster
     defaults:
       run:
         shell: bash
